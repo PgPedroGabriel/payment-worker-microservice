@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    payment-worker-microservice:
+      build: .
+      container_name: payment-worker-microservice
+      entrypoint: ["/bin/sh", "./entrypoint.sh"]
+      volumes:
+        - .:/usr/app/
+        - /usr/app/node_modules
+      environment:
+        - RABBITMQ_HOST_URL=amqp://some-rabbit:5672
+        - RABBITMQ_PAYMENT_QUEUE=order_process_payment

@@ -1,0 +1,42 @@
+{
+  "name": "payment-worker-microservice",
+  "version": "1.0.0",
+  "main": "./src/worker.js",
+  "repository": "https://github.com/PgPedroGabriel/payment-worker-microservice",
+  "author": "Pedro Gabriel <pg@levetec.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "queue": "nodemon --exec sucrase-node ./src/queue/worker.js",
+    "test": "RUNNINGTEST=1 jest --detectOpenHandles",
+    "build": "sucrase ./src -d ./dist --transforms imports",
+    "start-queue": "node dist/queue/worker.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "sleep": "^6.1.0",
+    "sucrase": "^3.10.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      ".(js|jsx|ts|tsx)": "@sucrase/jest-plugin"
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "@sucrase/jest-plugin": "^2.0.0",
+    "@types/jest": "^24.0.23",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  }
+}
