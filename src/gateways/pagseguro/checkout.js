@@ -9,6 +9,7 @@ class CheckoutPagseguro {
 
     console.log(`Payment approved... ${paymentModelContract.id}`);
     return {
+      order_id: paymentModelContract.id,
       status: 'APPROVED'
     };
   }

@@ -22,6 +22,9 @@ class Queue {
   }
 
   async subscribe() {
+    /**
+     * Work approuch
+     */
     try {
       const queueName = process.env.RABBITMQ_PAYMENT_QUEUE;
       this.channel.prefetch(1);
@@ -40,12 +43,23 @@ class Queue {
 
           console.log(response);
 
+          this.channel.assertExchange('payment_status_changed', 'fanout', {
+            durable: false
+          });
+
+          this.channel.publish(
+            'payment_status_changed',
+            '',
+            Buffer.from(JSON.stringify(response))
+          );
+
+          console.log(' [x] Sent %s', response);
+
           if (response.status === 'APPROVED') {
             // REMOVE FROM STOCK
           }
 
           // UPDATE ORDER WITH STATUS
-
           this.channel.ack(msg); // remove from queue
         }
       });

@@ -11,3 +11,4 @@ services:
       environment:
         - RABBITMQ_HOST_URL=amqp://some-rabbit:5672
         - RABBITMQ_PAYMENT_QUEUE=order_process_payment
+        - RABBITMQ_EXCHANGE_PAYMENT_STATUS_CHANGE=payment_status_changed
