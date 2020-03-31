@@ -37,11 +37,9 @@ class Queue {
         if (msg !== null) {
           const model = PaymentModelContract.parse(msg.content.toString());
 
-          const checkout = getCheckoutInstance(model.gateway);
+          const checkoutInstance = getCheckoutInstance(model.gateway);
 
-          const response = await checkout.doCheckoutRequest(model);
-
-          console.log(response);
+          const data = await checkoutInstance.doCheckoutRequest(model);
 
           this.channel.assertExchange('payment_status_changed', 'fanout', {
             durable: false
@@ -50,16 +48,11 @@ class Queue {
           this.channel.publish(
             'payment_status_changed',
             '',
-            Buffer.from(JSON.stringify(response))
+            Buffer.from(JSON.stringify(data))
           );
 
-          console.log(' [x] Sent %s', response);
+          console.log(' [x] Sent %s', JSON.stringify(data));
 
-          if (response.status === 'APPROVED') {
-            // REMOVE FROM STOCK
-          }
-
-          // UPDATE ORDER WITH STATUS
           this.channel.ack(msg); // remove from queue
         }
       });

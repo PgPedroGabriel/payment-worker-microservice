@@ -9,6 +9,7 @@ class CheckoutMercadoPago {
     console.log(`Payment approved... ${paymentModelContract.id} `);
     return {
       order_id: paymentModelContract.id,
+      products: paymentModelContract.products,
       status: 'APPROVED'
     };
   }
