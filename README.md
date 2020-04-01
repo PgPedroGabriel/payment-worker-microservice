@@ -4,6 +4,7 @@
 
 * Receive payment contract from RabbitMQ Queue worker
 * Dispatch RabbitMQ exchange that payment data of external gateway system
+* (Sentry to trace error logs)[https://sentry.io/]
 
 ### Checks
 
@@ -70,8 +71,8 @@ Install plugins
 - [ ] Add client Address Model to payment contract (queue)
 - [ ] Add database to save payments
 - [ ] Code coverge > 80%
-- [ ] Add Logging traces
-- [ ] Add ALARM when errors occur
+- [x] Add Logging traces
+- [x] Add ALARM when errors occur
 - [ ] Revison of production dockerfile builder
 - [ ] Create CI/CD pipelines with docker-compose to GCP Cloud Builder
 - [ ] Send pod to Kubernets Cluster

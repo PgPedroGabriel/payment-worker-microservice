@@ -12,6 +12,7 @@
     "start-queue": "node dist/queue/worker.js"
   },
   "dependencies": {
+    "@sentry/node": "5.15.4",
     "amqplib": "^0.5.5",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",

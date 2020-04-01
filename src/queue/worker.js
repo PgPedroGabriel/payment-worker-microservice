@@ -1,8 +1,13 @@
 import 'dotenv/config';
+import '../configs/sentry';
 
 import Queue from './models/Queue';
 
-(async () => {
-  await Queue.connectQueue();
-  await Queue.subscribe();
-})();
+try {
+  (async () => {
+    await Queue.connectQueue();
+    await Queue.subscribe();
+  })();
+} catch (e) {
+  throw new Error(e.message);
+}
